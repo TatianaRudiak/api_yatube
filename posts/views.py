@@ -19,7 +19,11 @@ class PostViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer, user=request.user)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED,
+            headers=headers
+        )
 
     def update(self, request, *args, **kwargs):
         if self.get_object().author != request.user:
